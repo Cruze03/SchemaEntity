@@ -1,5 +1,6 @@
 #pragma once
 #include "CBaseEntity.h"
+#include "CBasePlayerController.h"
 #include "CBaseModelEntity.h"
 #include "services.h"
 

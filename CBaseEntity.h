@@ -7,7 +7,7 @@
 #include "ctakedamageinfo.h"
 #include "virtual.h"
 
-extern CEntitySystem* g_pEntitySystem;
+extern CGameEntitySystem* g_pEntitySystem;
 
 inline CEntityInstance* UTIL_GetEntityByIndex(int index)
 {
@@ -246,7 +246,33 @@ public:
 
 	void CollisionRulesChanged()
 	{
-		CALL_VIRTUAL(void, 178, this);
+		#ifdef _WIN32
+		static int offset = 189;
+		#else
+		static int offset = 188;
+		#endif
+		
+		CALL_VIRTUAL(void, offset, this);
+	}
+	
+	bool IsPawn()
+	{
+		#ifdef _WIN32
+		static int offset = 172;
+		#else
+		static int offset = 171;
+		#endif
+		return CALL_VIRTUAL(bool, offset, this);
+	}
+
+	bool IsController()
+	{
+		#ifdef _WIN32
+		static int offset = 173;
+		#else
+		static int offset = 172;
+		#endif
+		return CALL_VIRTUAL(bool, offset, this);
 	}
 
 	int GetTeam() { return m_iTeamNum(); }
@@ -259,6 +285,7 @@ public:
 	// CEntitySubclassVDataBase* GetVData() { return *(CEntitySubclassVDataBase**)((uint8*)(m_nSubclassID()) + 4); }
 
 	const char* GetName() const { return m_pEntity->m_name.String(); }
+	const char* GetDesignerName() const { return m_pEntity->m_designerName.String(); }
 };
 
 class CBodyComponentSkeletonInstance : public CBodyComponent

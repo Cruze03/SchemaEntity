@@ -61,7 +61,7 @@ public:
 
 	bool IsBot()
 	{
-		return m_fFlags() & FL_PAWN_FAKECLIENT;
+		return m_fFlags() & FL_BOT;
 	}
 };
 
@@ -84,6 +84,7 @@ public:
 	SCHEMA_FIELD(float, m_aimPunchTickFraction)
 	SCHEMA_FIELD(QAngle, m_aimPunchAngle)
 	SCHEMA_FIELD(QAngle, m_aimPunchAngleVel)
+	SCHEMA_FIELD_POINTER(char, m_szLastPlaceName)
 };
 
 class CCSGO_TeamPreviewCharacterPosition: public CBaseEntity
