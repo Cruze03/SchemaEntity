@@ -24,6 +24,7 @@ public:
 	SCHEMA_FIELD_POINTER(char, m_iszPlayerName)
 	SCHEMA_FIELD(PlayerConnectedState, m_iConnected)
 	SCHEMA_FIELD(uint32_t, m_iDesiredFOV);
+	SCHEMA_FIELD(bool, m_bIsHLTV);
 
     CBasePlayerPawn *GetPawn() { return m_hPawn.Get(); }
 	const char *GetPlayerName() { return m_iszPlayerName(); }

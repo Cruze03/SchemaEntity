@@ -12,7 +12,7 @@ struct AttackerInfo_t
 	bool m_bIsPawn;
 	bool m_bIsWorld;
 	CHandle<CCSPlayerPawn> m_hAttackerPawn;
-	uint16_t m_nAttackerPlayerSlot;
+	int32_t m_nAttackerPlayerSlot;
 	int m_iTeamChecked;
 	int m_nTeam;
 };
@@ -40,12 +40,16 @@ public:
 	SCHEMA_FIELD(float, m_flOriginalDamage);
 	SCHEMA_FIELD(bool, m_bShouldBleed);
 	SCHEMA_FIELD(bool, m_bShouldSpark);
-	SCHEMA_FIELD(float, m_flDamageAbsorbed);
+
+	// SCHEMA_FIELD(float, m_flDamageAbsorbed);
 	SCHEMA_FIELD(TakeDamageFlags_t, m_nDamageFlags);
 	SCHEMA_FIELD(HitGroup_t, m_iHitGroupId);
 	SCHEMA_FIELD(int32_t, m_nNumObjectsPenetrated);
 	SCHEMA_FIELD(float, m_flFriendlyFireDamageReductionRatio);
+	SCHEMA_FIELD(bool, m_bStoppedBullet);
+
 	SCHEMA_FIELD(AttackerInfo_t, m_AttackerInfo);
+	// CUtlLeanVector<int> m_DestructibleHitGroupRequests
 	SCHEMA_FIELD(bool, m_bInTakeDamageFlow);
 };
 

@@ -7,12 +7,13 @@
 #include "ctakedamageinfo.h"
 #include "virtual.h"
 
-extern CEntitySystem* g_pEntitySystem;
+extern CGameEntitySystem *g_pEntitySystem;
 
-inline CEntityInstance* UTIL_GetEntityByIndex(int index)
+inline CEntityInstance *UTIL_GetEntityByIndex(int index)
 {
-	if(!g_pEntitySystem) return nullptr;
-	CEntityIdentity* pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
+	if (!g_pEntitySystem)
+		return nullptr;
+	CEntityIdentity *pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
 
 	for (; pEntity; pEntity = pEntity->m_pNext)
 	{
@@ -23,10 +24,11 @@ inline CEntityInstance* UTIL_GetEntityByIndex(int index)
 	return nullptr;
 }
 
-inline CEntityInstance* UTIL_FindEntityByClassname(const char* name)
+inline CEntityInstance *UTIL_FindEntityByClassname(const char *name)
 {
-	if(!g_pEntitySystem) return nullptr;
-	CEntityIdentity* pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
+	if (!g_pEntitySystem)
+		return nullptr;
+	CEntityIdentity *pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
 
 	for (; pEntity; pEntity = pEntity->m_pNext)
 	{
@@ -37,10 +39,11 @@ inline CEntityInstance* UTIL_FindEntityByClassname(const char* name)
 	return nullptr;
 }
 
-inline CEntityInstance* UTIL_FindEntityByEHandle(CEntityInstance* pFind)
+inline CEntityInstance *UTIL_FindEntityByEHandle(CEntityInstance *pFind)
 {
-	if(!g_pEntitySystem) return nullptr;
-	CEntityIdentity* pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
+	if (!g_pEntitySystem)
+		return nullptr;
+	CEntityIdentity *pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
 
 	for (; pEntity; pEntity = pEntity->m_pNext)
 	{
@@ -51,11 +54,12 @@ inline CEntityInstance* UTIL_FindEntityByEHandle(CEntityInstance* pFind)
 	return nullptr;
 }
 
-inline std::vector<CEntityInstance*> UTIL_FindEntityByClassnameAll(const char* name)
+inline std::vector<CEntityInstance *> UTIL_FindEntityByClassnameAll(const char *name)
 {
-	if(!g_pEntitySystem) return {};
-	CEntityIdentity* pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
-	std::vector<CEntityInstance*> entities;
+	if (!g_pEntitySystem)
+		return {};
+	CEntityIdentity *pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
+	std::vector<CEntityInstance *> entities;
 	for (; pEntity; pEntity = pEntity->m_pNext)
 	{
 		if (!strcmp(pEntity->m_designerName.String(), name))
@@ -64,14 +68,16 @@ inline std::vector<CEntityInstance*> UTIL_FindEntityByClassnameAll(const char* n
 	return entities;
 }
 
-inline std::vector<CEntityInstance*> UTIL_FindAllEntitiesByDesignerName(const char* name)
+inline std::vector<CEntityInstance *> UTIL_FindAllEntitiesByDesignerName(const char *name)
 {
-	if(!g_pEntitySystem) return {};
-	CEntityIdentity* pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
-	std::vector<CEntityInstance*> entities;
+	if (!g_pEntitySystem)
+		return {};
+	CEntityIdentity *pEntity = g_pEntitySystem->m_EntityList.m_pFirstActiveEntity;
+	std::vector<CEntityInstance *> entities;
 	for (; pEntity; pEntity = pEntity->m_pNext)
 	{
-		if (!pEntity->m_designerName.IsValid() || !strstr(pEntity->m_designerName.String(), "weapon_")) continue;
+		if (!pEntity->m_designerName.IsValid() || !strstr(pEntity->m_designerName.String(), "weapon_"))
+			continue;
 		entities.push_back(pEntity->m_pInstance);
 	}
 	return entities;
@@ -81,9 +87,9 @@ class CGameSceneNode
 public:
 	DECLARE_SCHEMA_CLASS(CGameSceneNode)
 
-	SCHEMA_FIELD(CEntityInstance*, m_pOwner);
-	SCHEMA_FIELD(CGameSceneNode*, m_pParent);
-	SCHEMA_FIELD(CGameSceneNode*, m_pChild);
+	SCHEMA_FIELD(CEntityInstance *, m_pOwner);
+	SCHEMA_FIELD(CGameSceneNode *, m_pParent);
+	SCHEMA_FIELD(CGameSceneNode *, m_pChild);
 	SCHEMA_FIELD(CNetworkOriginCellCoordQuantizedVector, m_vecOrigin);
 	SCHEMA_FIELD(QAngle, m_angRotation);
 	SCHEMA_FIELD(float, m_flScale);
@@ -173,7 +179,7 @@ public:
 	SCHEMA_FIELD(bool, m_bLagCompensate)
 	SCHEMA_FIELD(Vector, m_vecAbsVelocity)
 	SCHEMA_FIELD(Vector, m_vecBaseVelocity)
-	SCHEMA_FIELD(CCollisionProperty*, m_pCollision)
+	SCHEMA_FIELD(CCollisionProperty *, m_pCollision)
 	SCHEMA_FIELD(MoveCollide_t, m_MoveCollide)
 	SCHEMA_FIELD(MoveType_t, m_MoveType)
 	SCHEMA_FIELD(MoveType_t, m_nActualMoveType)
@@ -206,7 +212,7 @@ public:
 	void SetAbsOrigin(Vector vecOrigin) { m_CBodyComponent->m_pSceneNode->m_vecAbsOrigin(vecOrigin); }
 	void SetAbsRotation(QAngle angAbsRotation) { m_CBodyComponent->m_pSceneNode->m_angAbsRotation(angAbsRotation); }
 	void SetAngRotation(QAngle angRotation) { m_CBodyComponent->m_pSceneNode->m_angRotation(angRotation); }
-	CEntitySubclassVDataBase* GetVData() { return *(CEntitySubclassVDataBase**)((uint8*)(m_nSubclassID()) + 4); }
+	CEntitySubclassVDataBase *GetVData() { return *(CEntitySubclassVDataBase **)((uint8 *)(m_nSubclassID()) + 4); }
 
 	void SetAbsVelocity(Vector vecVelocity) { m_vecAbsVelocity = vecVelocity; }
 	void SetBaseVelocity(Vector vecVelocity) { m_vecBaseVelocity = vecVelocity; }
@@ -215,7 +221,7 @@ public:
 	{
 		CALL_VIRTUAL(void, 167, this, position, angles, velocity);
 	}
-	
+
 	void SetMoveType(MoveType_t nMoveType)
 	{
 		m_MoveType() = nMoveType;
@@ -247,7 +253,33 @@ public:
 
 	void CollisionRulesChanged()
 	{
-		CALL_VIRTUAL(void, 190, this);
+#ifdef _WIN32
+		static int offset = 185;
+#else
+		static int offset = 184;
+#endif
+
+		CALL_VIRTUAL(void, offset, this);
+	}
+
+	bool IsPawn()
+	{
+#ifdef _WIN32
+		static int offset = 168;
+#else
+		static int offset = 167;
+#endif
+		return CALL_VIRTUAL(bool, offset, this);
+	}
+
+	bool IsController()
+	{
+#ifdef _WIN32
+		static int offset = 169;
+#else
+		static int offset = 168;
+#endif
+		return CALL_VIRTUAL(bool, offset, this);
 	}
 
 	int GetTeam() { return m_iTeamNum(); }
@@ -259,12 +291,13 @@ public:
 	// A double pointer to entity VData is available 4 bytes past m_nSubclassID, if applicable
 	// CEntitySubclassVDataBase* GetVData() { return *(CEntitySubclassVDataBase**)((uint8*)(m_nSubclassID()) + 4); }
 
-	const char* GetName() const { return m_pEntity->m_name.String(); }
+	const char *GetName() const { return m_pEntity->m_name.String(); }
+	const char *GetDesignerName() const { return m_pEntity->m_designerName.String(); }
 };
 
 class CBodyComponentSkeletonInstance : public CBodyComponent
 {
-public:	
+public:
 	DECLARE_SCHEMA_CLASS(CBodyComponentSkeletonInstance);
 };
 

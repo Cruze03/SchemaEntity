@@ -1,6 +1,6 @@
 #include "ctimer.h"
 
-CUtlVector<CTimerBase*> g_timers;
+CUtlLinkedList<CTimerBase*> g_timers;
 
 void RemoveTimers()
 {

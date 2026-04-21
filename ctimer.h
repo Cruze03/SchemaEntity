@@ -1,6 +1,6 @@
 #pragma once
 #include <functional>
-#include "utlvector.h"
+#include "utllinkedlist.h"
 
 class CTimerBase {
 public:
@@ -13,7 +13,7 @@ public:
     float m_flLastExecute = -1;
 };
 
-extern CUtlVector<CTimerBase*> g_timers;
+extern CUtlLinkedList<CTimerBase*> g_timers;
 
 // Timer functions should return the time until next execution, or a negative value like -1.0f to stop
 // Having an interval of 0 is fine, in this case it will run on every game frame

@@ -40,10 +40,10 @@ enum CSRoundEndReason
 	TerroristsNotEscaped, /**< Terrorists have not escaped! */
 	VIPNotEscaped,		  /**< VIP has not escaped! - Doesn't exist on CS:GO */
 	GameStart,			  /**< Game Commencing! */
-	TerroristsSurrender, /**< Terrorists Surrender */
-	CTSurrender,		 /**< CTs Surrender */
-	TerroristsPlanted,	 /**< Terrorists Planted the bomb */
-	CTsReachedHostage,	 /**< CTs Reached the hostage */
+	TerroristsSurrender,  /**< Terrorists Surrender */
+	CTSurrender,		  /**< CTs Surrender */
+	TerroristsPlanted,	  /**< Terrorists Planted the bomb */
+	CTsReachedHostage,	  /**< CTs Reached the hostage */
 	SurvivalWin,
 	SurvivalDraw
 };
@@ -103,12 +103,12 @@ enum EInButtonState : uint32_t
 enum ParticleAttachment_t : uint32_t
 {
 	PATTACH_INVALID = 0xffffffff,
-	PATTACH_ABSORIGIN = 0x0,			// Spawn at entity origin
-	PATTACH_ABSORIGIN_FOLLOW = 0x1,		// Spawn at and follow entity origin
+	PATTACH_ABSORIGIN = 0x0,		// Spawn at entity origin
+	PATTACH_ABSORIGIN_FOLLOW = 0x1, // Spawn at and follow entity origin
 	PATTACH_CUSTOMORIGIN = 0x2,
 	PATTACH_CUSTOMORIGIN_FOLLOW = 0x3,
-	PATTACH_POINT = 0x4,				// Spawn at attachment point
-	PATTACH_POINT_FOLLOW = 0x5,			// Spawn at and follow attachment point
+	PATTACH_POINT = 0x4,		// Spawn at attachment point
+	PATTACH_POINT_FOLLOW = 0x5, // Spawn at and follow attachment point
 	PATTACH_EYES_FOLLOW = 0x6,
 	PATTACH_OVERHEAD_FOLLOW = 0x7,
 	PATTACH_WORLDORIGIN = 0x8,
@@ -229,7 +229,7 @@ struct EmitSound_t
 	// clang-format on
 	const char *m_pSoundName;
 	Vector m_vecOrigin;
-	float m_flVolume;    // soundevent's volume_atten
+	float m_flVolume;	 // soundevent's volume_atten
 	float m_flSoundTime; // sound delay
 	CEntityIndex m_nSpeakerEntity;
 	SoundEventGuid_t m_nForceGuid;
@@ -316,54 +316,54 @@ public:
 	SCHEMA_FIELD(bool, m_bGlowing)
 };
 
-struct TraceHistory
-{
-	Vector start;
-	Vector end;
-	Ray_t ray;
-	bool didHit;
-	Vector m_vStartPos;  // start position
-	Vector m_vEndPos;    // final position
-	Vector m_vHitNormal; // surface normal at impact
-	Vector m_vHitPoint;  // exact hit point if m_bExactHitPoint is true, otherwise equal to m_vEndPos
+// struct TraceHistory
+// {
+// 	Vector start;
+// 	Vector end;
+// 	Ray_t ray;
+// 	bool didHit;
+// 	Vector m_vStartPos;  // start position
+// 	Vector m_vEndPos;    // final position
+// 	Vector m_vHitNormal; // surface normal at impact
+// 	Vector m_vHitPoint;  // exact hit point if m_bExactHitPoint is true, otherwise equal to m_vEndPos
 
-	float m_flHitOffset; // surface normal hit offset
-	float m_flFraction;  // time completed, 1.0 = didn't hit anything
+// 	float m_flHitOffset; // surface normal hit offset
+// 	float m_flFraction;  // time completed, 1.0 = didn't hit anything
 
-	float32 error;
-	Vector velocity;
-};
+// 	float32 error;
+// 	Vector velocity;
+// };
 
-class CCheckTransmitInfoHack
-{
-public:
-	CBitVec<16384>* m_pTransmitEntity;
+// class CCheckTransmitInfoHack
+// {
+// public:
+// 	CBitVec<16384>* m_pTransmitEntity;
 
-private:
-	[[maybe_unused]] int8_t m_pad8[568];
+// private:
+// 	[[maybe_unused]] int8_t m_pad8[568];
 
-public:
-	int32_t m_nPlayerSlot;
-	bool m_bFullUpdate;
-};
+// public:
+// 	int32_t m_nPlayerSlot;
+// 	bool m_bFullUpdate;
+// };
 
-struct trace_info_t {
-	CEntityInstance *m_pEnt;
-	const CHitBox *m_pHitbox;
-	Vector m_vStartPos;
-	Vector m_vEndPos;
-	Vector m_vHitNormal;
-	Vector m_vHitPoint;
-	float m_flHitOffset;
-	float m_flFraction;
-	int32 m_nTriangle;
-	int16 m_nHitboxBoneIndex;
-	RayType_t m_eRayType;
-	bool m_bStartInSolid;
-	bool m_bExactHitPoint;
+// struct trace_info_t {
+// 	CEntityInstance *m_pEnt;
+// 	const CHitBox *m_pHitbox;
+// 	Vector m_vStartPos;
+// 	Vector m_vEndPos;
+// 	Vector m_vHitNormal;
+// 	Vector m_vHitPoint;
+// 	float m_flHitOffset;
+// 	float m_flFraction;
+// 	int32 m_nTriangle;
+// 	int16 m_nHitboxBoneIndex;
+// 	RayType_t m_eRayType;
+// 	bool m_bStartInSolid;
+// 	bool m_bExactHitPoint;
 
-	bool DidHit() const 
-	{ 
-		return m_flFraction < 1 || m_bStartInSolid; 
-	}
-};
+// 	bool DidHit() const
+// 	{
+// 		return m_flFraction < 1 || m_bStartInSolid;
+// 	}
+// };
