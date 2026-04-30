@@ -34,20 +34,20 @@ public:
 class CEconItemAttribute
 {
 public:
-    DECLARE_SCHEMA_CLASS_INLINE(CEconItemAttribute);
-    SCHEMA_FIELD(uint16_t, m_iAttributeDefinitionIndex);
-    SCHEMA_FIELD(float32, m_flValue);
-    SCHEMA_FIELD(float32, m_flInitialValue);
-    SCHEMA_FIELD(int32, m_nRefundableCurrency);
-    SCHEMA_FIELD(bool, m_bSetBonus);
+	DECLARE_SCHEMA_CLASS_INLINE(CEconItemAttribute);
+	SCHEMA_FIELD(uint16_t, m_iAttributeDefinitionIndex);
+	SCHEMA_FIELD(float32, m_flValue);
+	SCHEMA_FIELD(float32, m_flInitialValue);
+	SCHEMA_FIELD(int32, m_nRefundableCurrency);
+	SCHEMA_FIELD(bool, m_bSetBonus);
 };
 
 class CAttributeList
 {
 public:
-    DECLARE_SCHEMA_CLASS_INLINE(CAttributeList);
-    SCHEMA_FIELD(CAttributeManager*, m_pManager);
-	SCHEMA_FIELD_OLD(CUtlVector<CEconItemAttribute>, CAttributeList, m_Attributes);
+	DECLARE_SCHEMA_CLASS_INLINE(CAttributeList);
+	SCHEMA_FIELD(CAttributeManager *, m_pManager);
+	// SCHEMA_FIELD_OLD(CUtlVector<CEconItemAttribute>, CAttributeList, m_Attributes);
 };
 
 class CEconItemView
@@ -118,44 +118,44 @@ class CBasePlayerWeapon : public CEconEntity
 {
 public:
 	DECLARE_SCHEMA_CLASS(CBasePlayerWeapon)
-	
+
 	SCHEMA_FIELD(GameTick_t, m_nNextPrimaryAttackTick);
 	SCHEMA_FIELD(float, m_flNextPrimaryAttackTickRatio);
 	SCHEMA_FIELD(GameTick_t, m_nNextSecondaryAttackTick);
 	SCHEMA_FIELD(float, m_flNextSecondaryAttackTickRatio);
 
-    SCHEMA_FIELD(int32_t, m_iClip1);
-    SCHEMA_FIELD(int32_t, m_iClip2);
-    SCHEMA_FIELD_POINTER(int32_t, m_pReserveAmmo);
+	SCHEMA_FIELD(int32_t, m_iClip1);
+	SCHEMA_FIELD(int32_t, m_iClip2);
+	SCHEMA_FIELD_POINTER(int32_t, m_pReserveAmmo);
 
-	CCSWeaponBaseVData* GetWeaponVData() { return (CCSWeaponBaseVData*)GetVData(); }
+	CCSWeaponBaseVData *GetWeaponVData() { return (CCSWeaponBaseVData *)GetVData(); }
 
-	const char* GetWeaponClassname() noexcept
+	const char *GetWeaponClassname() noexcept
 	{
-		const char* pszClassname = GetClassname();
+		const char *pszClassname = GetClassname();
 		if (V_StringHasPrefixCaseSensitive(pszClassname, "item_"))
 			return pszClassname;
 
 		switch (m_AttributeManager().m_Item().m_iItemDefinitionIndex)
 		{
-			case 23:
-				return "weapon_mp5sd";
-			case 41:
-				return "weapon_knifegg";
-			case 42:
-				return "weapon_knife";
-			case 59:
-				return "weapon_knife_t";
-			case 60:
-				return "weapon_m4a1_silencer";
-			case 61:
-				return "weapon_usp_silencer";
-			case 63:
-				return "weapon_cz75a";
-			case 64:
-				return "weapon_revolver";
-			default:
-				return pszClassname;
+		case 23:
+			return "weapon_mp5sd";
+		case 41:
+			return "weapon_knifegg";
+		case 42:
+			return "weapon_knife";
+		case 59:
+			return "weapon_knife_t";
+		case 60:
+			return "weapon_m4a1_silencer";
+		case 61:
+			return "weapon_usp_silencer";
+		case 63:
+			return "weapon_cz75a";
+		case 64:
+			return "weapon_revolver";
+		default:
+			return pszClassname;
 		}
 	}
 };
@@ -172,7 +172,6 @@ public:
 	SCHEMA_FIELD(int, m_iRecoilIndex);
 	SCHEMA_FIELD(float, m_flRecoilIndex);
 };
-
 
 class CWeaponBaseItem : public CCSWeaponBase
 {

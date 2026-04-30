@@ -87,9 +87,9 @@ class CPlayerPawnComponent
 public:
 	DECLARE_SCHEMA_CLASS(CPlayerPawnComponent);
 
-	SCHEMA_FIELD(CNetworkVarChainer2, __m_pChainEntity)
+	SCHEMA_FIELD(CNetworkVarChainer, __m_pChainEntity)
 
-	CCSPlayerPawn* GetPawn() { return reinterpret_cast<CCSPlayerPawn*>(__m_pChainEntity().m_pEntity); }
+	CCSPlayerPawn *GetPawn() { return reinterpret_cast<CCSPlayerPawn *>(__m_pChainEntity().m_pEntity); }
 };
 
 class CCSPlayerController_InventoryServices
@@ -101,18 +101,19 @@ public:
 	SCHEMA_FIELD(int32_t, m_nPersonaDataPublicLevel)
 	SCHEMA_FIELD(uint16_t, m_unMusicID)
 	SCHEMA_FIELD_POINTER(int, m_rank)
-
 };
 
 class CCSPlayer_DamageReactServices : public CPlayerPawnComponent
 {
 	virtual ~CCSPlayer_DamageReactServices() = 0;
+
 public:
 };
 
 class CPlayer_MovementServices : public CPlayerPawnComponent
 {
 	virtual ~CPlayer_MovementServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CPlayer_MovementServices);
 
@@ -131,6 +132,7 @@ public:
 class CPlayer_MovementServices_Humanoid : public CPlayer_MovementServices
 {
 	virtual ~CPlayer_MovementServices_Humanoid() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CPlayer_MovementServices_Humanoid);
 
@@ -145,6 +147,7 @@ public:
 class CPlayer_CameraServices : public CPlayerPawnComponent
 {
 	virtual ~CPlayer_CameraServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CPlayer_CameraServices);
 
@@ -155,6 +158,7 @@ public:
 class CCSPlayer_MovementServices : public CPlayer_MovementServices_Humanoid
 {
 	virtual ~CCSPlayer_MovementServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CCSPlayer_MovementServices);
 
@@ -171,6 +175,7 @@ public:
 class CPlayer_WeaponServices : public CPlayerPawnComponent
 {
 	virtual ~CPlayer_WeaponServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CPlayer_WeaponServices);
 
@@ -183,6 +188,7 @@ public:
 class CPlayer_ViewModelServices : public CPlayerPawnComponent
 {
 	virtual ~CPlayer_ViewModelServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CPlayer_ViewModelServices);
 };
@@ -191,12 +197,13 @@ class CBaseViewModel : public CBaseModelEntity
 {
 public:
 	DECLARE_SCHEMA_CLASS(CBaseViewModel);
-	SCHEMA_FIELD(CUtlSymbolLarge, m_sVMName);	
+	SCHEMA_FIELD(CUtlSymbolLarge, m_sVMName);
 };
 
 class CCSPlayer_ViewModelServices : public CPlayer_ViewModelServices
 {
 	virtual ~CCSPlayer_ViewModelServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CCSPlayer_ViewModelServices);
 	SCHEMA_FIELD_POINTER(CHandle<CBaseViewModel>, m_hViewModel)
@@ -206,6 +213,7 @@ public:
 class CCSPlayer_WeaponServices : public CPlayer_WeaponServices
 {
 	virtual ~CCSPlayer_WeaponServices() = 0;
+
 public:
 	DECLARE_SCHEMA_CLASS(CCSPlayer_WeaponServices);
 
@@ -222,7 +230,7 @@ public:
 	SCHEMA_FIELD(bool, m_bIsPickingUpItemWithUse)
 	SCHEMA_FIELD(bool, m_bPickedUpWeapon)
 
-	void DropWeapon(CBasePlayerWeapon* pWeapon, Vector* pVecTarget = nullptr, Vector* pVelocity = nullptr)
+	void DropWeapon(CBasePlayerWeapon *pWeapon, Vector *pVecTarget = nullptr, Vector *pVelocity = nullptr)
 	{
 		CALL_VIRTUAL(void, 24, this, pWeapon, pVecTarget, pVelocity);
 	}
@@ -233,7 +241,7 @@ class CCSPlayerController_InGameMoneyServices
 public:
 	DECLARE_SCHEMA_CLASS(CCSPlayerController_InGameMoneyServices);
 
-    SCHEMA_FIELD(int, m_iAccount);
+	SCHEMA_FIELD(int, m_iAccount);
 };
 
 class CPlayer_ItemServices : public CPlayerPawnComponent
@@ -252,22 +260,22 @@ public:
 	DECLARE_SCHEMA_CLASS(CCSPlayer_ItemServices);
 
 private:
-	virtual CBasePlayerWeapon* _GiveNamedItem(const char* pchName) = 0;
+	virtual CBasePlayerWeapon *_GiveNamedItem(const char *pchName) = 0;
 
 public:
-	virtual bool GiveNamedItemBool(const char* pchName) = 0;
-	virtual CBasePlayerWeapon* GiveNamedItem(const char* pchName) = 0;
+	virtual bool GiveNamedItemBool(const char *pchName) = 0;
+	virtual CBasePlayerWeapon *GiveNamedItem(const char *pchName) = 0;
 	// Recommended to use CCSPlayer_WeaponServices::DropWeapon instead (parameter is ignored here)
-	virtual void DropActiveWeapon(CBasePlayerWeapon* pWeapon) = 0;
+	virtual void DropActiveWeapon(CBasePlayerWeapon *pWeapon) = 0;
 	virtual void StripPlayerWeapons(bool removeSuit) = 0;
 
 	SCHEMA_FIELD(bool, m_bHasDefuser);
 	SCHEMA_FIELD(bool, m_bHasHelmet);
 
 	void RemoveWeapons()
-    {
+	{
 		CALL_VIRTUAL(void, 23, this);
-    }
+	}
 };
 
 // We need an exactly sized class to be able to iterate the vector, our schema system implementation can't do this
@@ -275,14 +283,14 @@ class WeaponPurchaseCount_t
 {
 private:
 	virtual void unk01() {};
-	uint64_t unk1 = 0; // 0x8
-	uint64_t unk2 = 0; // 0x10
-	uint64_t unk3 = 0; // 0x18
-	uint64_t unk4 = 0; // 0x20
+	uint64_t unk1 = 0;	// 0x8
+	uint64_t unk2 = 0;	// 0x10
+	uint64_t unk3 = 0;	// 0x18
+	uint64_t unk4 = 0;	// 0x20
 	uint64_t unk5 = -1; // 0x28
 public:
-	uint16_t m_nItemDefIndex; // 0x30	
-	uint16_t m_nCount; // 0x32
+	uint16_t m_nItemDefIndex; // 0x30
+	uint16_t m_nCount;		  // 0x32
 private:
 	uint32_t unk6 = 0;
 };
