@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include "mathlib/mathlib.h"
 #include "utllinkedlist.h"
 
 class CTimerBase {
