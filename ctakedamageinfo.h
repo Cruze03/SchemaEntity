@@ -2,6 +2,7 @@
 #include <platform.h>
 #include "ehandle.h"
 #include "globaltypes.h"
+#include "gametrace.h"
 
 class CBaseEntity;
 class CCSPlayerPawn;

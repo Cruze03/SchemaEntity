@@ -261,13 +261,14 @@ public:
 
 		CALL_VIRTUAL(void, offset, this);
 	}
-
+// Use offset from:
+// CSSharp (CBaseEntity_IsPlayerPawn): https://github.com/itsAudioo/CounterStrikeSharp/blob/main/configs/addons/counterstrikesharp/gamedata/gamedata.json#L169
 	bool IsPawn()
 	{
 #ifdef _WIN32
-		static int offset = 168;
+		static int offset = 169;
 #else
-		static int offset = 167;
+		static int offset = 170;
 #endif
 		return CALL_VIRTUAL(bool, offset, this);
 	}
